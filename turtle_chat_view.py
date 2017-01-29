@@ -1,5 +1,5 @@
 #2016-2017 PERSONAL PROJECTS: TurtleChat!
-#WRITE YOUR NAME HERE!
+#Yonatan Alterman!
 
 #####################################################################################
 #                                   IMPORTS                                         #
@@ -9,7 +9,9 @@
 #Finally, from the turtle_chat_widgets module, import two classes: Button and TextInput
 #####################################################################################
 #####################################################################################
-
+import turtle
+from turtle_chat_client import Client
+from turtle_chat_widgets import Button,TextInput
 #####################################################################################
 #                                   TextBox                                         #
 #####################################################################################
@@ -37,7 +39,21 @@
 #   \r to your string.  Test it out at the Python shell for practice
 #####################################################################################
 #####################################################################################
-
+class TextBox(TextInput):
+    def draw_box(self):
+        turtle.clear() 
+        turtle.penup()
+        turtle.goto(0,0)
+        turtle.pendown()
+        turtle.pencolor("red")
+        turtle.pensize(4)
+        turtle.goto(200,0)
+        turtle.goto(200,100)
+        turtle.goto(0,100)
+        turtle.goto(0,0)
+        turtle.penup()
+    def write_msg(self):
+        turtle.write(self.new_msg)
 #####################################################################################
 #                                  SendButton                                       #
 #####################################################################################
@@ -55,8 +71,7 @@
 #      you send messages and update message displays.
 #####################################################################################
 #####################################################################################
-
-
+#class SendButton(Button):
 ##################################################################
 #                             View                               #
 ##################################################################
@@ -66,6 +81,7 @@
 #Read the comments below for hints and directions.
 ##################################################################
 ##################################################################
+'''
 class View:
     _MSG_LOG_LENGTH=5 #Number of messages to retain in view
     _SCREEN_WIDTH=300
@@ -74,9 +90,11 @@ class View:
 
     def __init__(self,username='Me',partner_name='Partner'):
         '''
+'''
         :param username: the name of this chat user
         :param partner_name: the name of the user you are chatting with
         '''
+'''
         ###
         #Store the username and partner_name into the instance.
         ###
@@ -117,6 +135,7 @@ class View:
 
     def send_msg(self):
         '''
+'''
         You should implement this method.  It should call the
         send() method of the Client object stored in this View
         instance.  It should also call update the list of messages,
@@ -125,6 +144,7 @@ class View:
         It should call self.display_msg() to cause the message
         display to be updated.
         '''
+'''
         pass
 
     def get_msg(self):
@@ -132,6 +152,7 @@ class View:
 
     def setup_listeners(self):
         '''
+'''
         Set up send button - additional listener, in addition to click,
         so that return button will send a message.
         To do this, you will use the turtle.onkeypress function.
@@ -141,10 +162,12 @@ class View:
 
         Then, it can call turtle.listen()
         '''
+'''
         pass
 
     def msg_received(self,msg):
         '''
+'''
         This method is called when a new message is received.
         It should update the log (queue) of messages, and cause
         the view of the messages to be updated in the display.
@@ -152,6 +175,7 @@ class View:
         :param msg: a string containing the message received
                     - this should be displayed on the screen
         '''
+'''
         print(msg) #Debug - print message
         show_this_msg=self.partner_name+' says:\r'+ msg
         #Add the message to the queue either using insert (to put at the beginning)
@@ -161,9 +185,11 @@ class View:
 
     def display_msg(self):
         '''
+'''
         This method should update the messages displayed in the screen.
         You can get the messages you want from self.msg_queue
         '''
+'''
         pass
 ##############################################################
 ##############################################################
@@ -187,4 +213,5 @@ if __name__ == '__main__':
                 my_view.msg_received(msg_in)
         turtle.ontimer(check,_WAIT_TIME) #Check recursively
     check()
-    turtle.mainloop()
+'''
+#turtle.mainloop()
