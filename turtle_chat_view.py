@@ -12,6 +12,8 @@
 import turtle
 from turtle_chat_client import Client
 from turtle_chat_widgets import Button,TextInput
+
+turtle.color('white')
 #####################################################################################
 #                                   TextBox                                         #
 #####################################################################################
@@ -43,21 +45,23 @@ class TextBox(TextInput):
     def draw_box(self):
         turtle.hideturtle()
         tw1 = turtle.clone()
+        tw1.color('red')
+        tw1.pensize(4)
         tw1.penup()
-        tw1.goto(100,0)
+        tw1.goto(150,0)
         tw1.pendown()
-        tw1.goto(-100,0)
-        tw1.goto(-100,-100)
-        tw1.goto(100,-100)
-        tw1.goto(100,0)
+        tw1.goto(-150,0)
+        tw1.goto(-150,-150)
+        tw1.goto(150,-150)
+        tw1.goto(150,0)
         tw1.hideturtle()
-        turtle.mainloop()
         
     def write_msg(self):
         self.writer.clear()
         print(self.new_msg)
-        #self.writer.goto(-95,-15)
-        self.writer.write(self.new_msg)
+        self.writer.goto(-140,-30)
+        self.writer.color('red')
+        self.writer.write(self.new_msg, font=('Cambria',17))
 
 #####################################################################################
 #                                  SendButton                                       #
@@ -78,11 +82,11 @@ class TextBox(TextInput):
 #####################################################################################
 class SendButton(Button):
     def __init__(self,view):
-        super(SendButton,self).__init__(my_turtle=None,shape=None,pos=(0,-150))
+        super(SendButton,self).__init__(my_turtle=None,shape=None,pos=(0,-200))
         self.view = view
     def fun(self,x=None,y=None):
-        self.view.new_msg()
-        
+        self.view.send_msg()
+
 ##################################################################
 #                             View                               #
 ##################################################################
@@ -94,7 +98,7 @@ class SendButton(Button):
 ##################################################################
 class View:
     _MSG_LOG_LENGTH=5 #Number of messages to retain in view
-    _SCREEN_WIDTH=300
+    _SCREEN_WIDTH=800
     _SCREEN_HEIGHT=600
     _LINE_SPACING=round(_SCREEN_HEIGHT/2/(_MSG_LOG_LENGTH+1))
 
@@ -210,7 +214,7 @@ class View:
         print(msg) #Debug - print message
         show_this_msg=self.partner_name+' says:\r'+ msg
         self.msg_queue.insert(0, show_this_msg)
-        self.display_msg()
+        self.display_msg(100,250)
         
         #Add the message to the queue either using insert (to put at the beginning)
         #or append (to put at the end).
@@ -224,11 +228,12 @@ class View:
         You can get the messages you want from self.msg_queue
         '''     
         self.display.clear()
-        self.display.write(self.msg_queue[0])
+        self.display.write(self.msg_queue[0], font=('Cambria',17,'normal'))
         
 ##############################################################
 ##############################################################
-
+wallpaper=turtle.Screen()
+wallpaper.bgpic('nyc.gif')
 
 #########################################################
 #Leave the code below for now - you can play around with#
@@ -249,3 +254,4 @@ if __name__ == '__main__':
         turtle.ontimer(check,_WAIT_TIME) #Check recursively
     check()
 
+turtle.mainloop()
